@@ -1,24 +1,16 @@
-import {isObjectEmpty, moveToElement, showPreloader} from "../utils/_helpers";
-import 'selectric';
-import {selectrickInit} from "../../plugins/_selectric-init";
-import BookForm from "../book/BookForm";
-import {showMsg, showNotices} from "../../plugins/_fancybox-init";
-import {initTelMask} from "./_number-input";
-import changeQuestionsHead from "../book/_questions";
+import {hidePreloader, isJsonString, moveToElement, showPreloader} from "../utils/_helpers";
+import {showMsg} from "../../plugins/_fancybox-init";
 
 export default class FormHandler {
     constructor(selector) {
         this.selector = selector;
         this.$document = $(document);
-        this.forms = $(document).find(selector);
-        this.$sendengForm = $(document).find(selector);
         this.initialize();
         this.selectInit();
     }
 
     selectInit() {
-        const t = this;
-        $(document).on('change', '.trigger-form-js', function (e) {
+        $(document).on('change', '.trigger-form-js', function () {
             const $select = $(this);
             $select.closest('form').submit();
         });
@@ -39,7 +31,6 @@ export default class FormHandler {
 
         const formData = new FormData(document.getElementById(formId));
         $form.addClass('sending');
-        this.$sendengForm = $form;
         this.sendRequest({
             type: $form.attr('method') || "POST",
             url: $form.attr('action') || adminAjax,
@@ -53,9 +44,7 @@ export default class FormHandler {
 
     validateForm($form) {
         let isValid = true;
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
 
-        // Validate inputs and textareas
         $form.find('input, textarea').each((_, input) => {
             const $input = $(input);
             const $label = $input.closest('.form-label');
@@ -78,7 +67,7 @@ export default class FormHandler {
             const $select = $(select);
             const $label = $select.closest('.form-label');
             const value = $select.val();
-            const test = !value || value === null || (Array.isArray(value) && value.length === 0);
+            const test = !value || false || (Array.isArray(value) && value.length === 0);
 
             if (test) {
                 isValid = false;
@@ -147,50 +136,25 @@ export default class FormHandler {
             showMsg(errorString);
             return;
         }
-        this.showPreloader();
-        this.$document.find('body').addClass('loading').addClass('sending-form');
+        showPreloader();
+        this.$document.find('body').addClass('loading');
         $.ajax(options).done((response) => {
+            this.$document.find('body').removeClass('loading');
             if (response) {
-                const isJson = this.isJsonString(response);
-                this.$document.find('body').removeClass('loading').removeClass('sending-form');
-                this.$document.find('.loading-button').removeClass('loading-button').removeClass('not-active');
-                this.$sendengForm.removeClass('sending');
+                const isJson = isJsonString(response);
                 if (isJson) {
                     const data = JSON.parse(response);
                     const message = data.msg || '';
-                    const session_id = data.session_id || '';
-                    const text = data.msg_text || '';
-                    const type = data.type || '';
                     const url = data.url || '';
                     const reload = data.reload || '';
-                    const html = data.step_html || '';
                     if (message) {
-                        this.showMessage(message, type, text, url);
-                    }else {
+                        showMsg(message, url);
+                    } else {
                         if (url) {
                             showPreloader();
                             window.location.href = url;
                             return;
                         }
-                    }
-                    if (html) {
-                        this.$document.find('.book-render').html(html);
-                        selectrickInit();
-                        if (this.$document.find('#calendarDays')) {
-                            const book = new BookForm();
-                            book.calendarInit();
-                        }
-                        $('html, body').animate({
-                            scrollTop: this.$document.find('.book-render').offset().top
-                        });
-                        showNotices();
-                        initTelMask();
-                        changeQuestionsHead();
-                    }
-
-                    if (session_id && publishableKey !== '0') {
-                        const stripe = Stripe(publishableKey);
-                        return stripe.redirectToCheckout({sessionId: session_id});
                     }
                     if (reload === 'true') {
                         if (message) {
@@ -203,60 +167,11 @@ export default class FormHandler {
                         return;
                     }
                 } else {
-                    this.showMessage(response);
+                    showMsg(response);
                 }
 
             }
-            this.hidePreloader();
+            hidePreloader();
         });
     }
-
-    isJsonString(str) {
-        try {
-            JSON.parse(str);
-            return true;
-        } catch {
-            return false;
-        }
-    }
-
-    showMessage(message, type = '', text = '', url = '') {
-        const selector = '#dialog' + (type ? '-' + type : '');
-        const $modal = $(document).find(selector);
-
-        if ($modal.length === 0) {
-            alert(message);
-            if (url) {
-                window.location.href = url;
-            }
-            return;
-        }
-
-        $modal.find('.modal__title').html(message);
-        $modal.find('.modal__text').html(text);
-
-        $.fancybox.open($modal, {
-            afterClose: function() { // Виконати після закриття модального вікна
-                if (url) {
-                    window.location.href = url;
-                }
-            }
-        });
-    }
-
-
-    showPreloader() {
-        $('.preloader').addClass('active');
-    }
-
-    hidePreloader() {
-        $('.preloader').removeClass('active');
-    }
 }
-
-function setDefaultImage(preview) {
-    if (preview) {
-        preview.src = preview.getAttribute('data-default');
-    }
-}
-
