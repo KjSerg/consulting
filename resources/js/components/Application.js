@@ -53,7 +53,6 @@ export default class Application {
         });
     }
 
-
     linkListener() {
         const t = this;
         sendRequestClickListener();
@@ -135,6 +134,24 @@ export default class Application {
                 $(document).find('.pagination-js').html($pagination.html());
                 $(document).find('.container-js').append($catalog.html());
             });
+        });
+        $(document).on('click', '.header-container-mobile .menu-item-has-children', function (e) {
+            e.preventDefault();
+            const $t = $(this);
+            const $wrapper = $t;
+            let $container = $('.header-container-mobile .sub-container');
+            if ($container.length === 0) {
+                $('.header-container-mobile').append('<div class="sub-container"></div>');
+                $container = $(document).find('.header-container-mobile .sub-container');
+            }
+            $container.html($wrapper.html());
+            $container.closest('.sub-container-wrapper').addClass('active');
+            $('body').addClass('open-sub-container-wrapper');
+        });
+        $(document).on('click', '.close-sub-container', function (e) {
+            e.preventDefault();
+            $(document).find('.sub-container-wrapper').removeClass('active');
+            $('body').removeClass('open-sub-container-wrapper');
         });
 
     }

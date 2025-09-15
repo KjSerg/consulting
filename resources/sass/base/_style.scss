@@ -3,13 +3,17 @@ html {
   @media (max-width: 1600px) {
     //font-size: 9px;
   }
+  @media (max-width: 450px) {
+    font-size: 10px;
+
+  }
 }
 
 body {
   position: relative;
   display: flex;
   flex-direction: column;
-  background-color: #fff;
+  background: #161616;
   color: #FFF;
   font-family: "Hanken Grotesk", sans-serif;
   font-size: 2rem;
@@ -18,6 +22,14 @@ body {
   line-height: 3.6rem;
 
   &.safari * {
+  }
+
+  &.open-sub-container-wrapper {
+    overflow: hidden;
+
+    .header-container-mobile {
+      overflow: hidden;
+    }
   }
 }
 
