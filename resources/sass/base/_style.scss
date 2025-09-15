@@ -153,6 +153,13 @@ em, i {
 
 .section {
   position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top center;
+
+  &--white {
+    background-color: #fff;
+  }
 
   &:not(.head-section, .main-section) {
     padding: 12rem 0;
