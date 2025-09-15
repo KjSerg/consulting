@@ -154,7 +154,7 @@ em, i {
 .section {
   position: relative;
 
-  &:not(.head-section) {
+  &:not(.head-section, .main-section) {
     padding: 12rem 0;
     @media (max-width: 1024px) {
       padding: 4rem 0;

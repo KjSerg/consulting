@@ -1,0 +1,32 @@
+.custom-button {
+  display: inline-flex;
+  padding: 1.4rem 4rem;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 6rem;
+  background: #9935BA;
+  gap: 1.2rem;
+  color: #FFF;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 3.4rem;
+  @media (max-width: 1024px) {
+    padding: 1rem 2rem;
+  }
+  &:hover {
+    @media (min-width: 1024px) {
+      background-color: #74218F;
+    }
+  }
+
+  &:active {
+    background-color: #74218F;
+  }
+
+  .icon {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+}
