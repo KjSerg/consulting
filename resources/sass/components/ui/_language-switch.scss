@@ -1,6 +1,8 @@
 .language-switch {
   position: relative;
+  z-index: 2;
   width: 21.6rem;
+  background-color: #161616;
 
   &-regions {
     position: absolute;

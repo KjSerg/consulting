@@ -1,7 +1,7 @@
 html {
   font-size: 10px;
   @media (max-width: 1600px) {
-    //font-size: 9px;
+    font-size: 9px;
   }
   @media (max-width: 450px) {
     font-size: 10px;
@@ -156,6 +156,24 @@ em, i {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top center;
+
+  &__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    img, picture {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    & + * {
+      position: relative;
+      z-index: 1;
+    }
+  }
 
   &--white {
     background-color: #fff;
