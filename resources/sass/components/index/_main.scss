@@ -74,8 +74,11 @@
     line-height: 13.5rem;
     letter-spacing: -0.2rem;
     text-transform: uppercase;
-    @media (max-width: 1024px) {
+
+    @media (max-width: 1600px) {
       margin-bottom: 10rem;
+    }
+    @media (max-width: 1024px) {
       font-size: 8rem;
       line-height: 9rem;
     }
