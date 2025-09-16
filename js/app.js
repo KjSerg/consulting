@@ -25019,81 +25019,106 @@ var Slick = /*#__PURE__*/function () {
     key: "headSliderInit",
     value: function headSliderInit() {
       var t = this;
-      $(document).find('.head-slider').each(function () {
+      $(document).find('.cases-list').each(function () {
         var $slider = $(this);
         var $prev = $(this).closest('section').find('.slick__prev');
         var $next = $(this).closest('section').find('.slick__next');
-        var $dots = $(this).closest('section').find('.head-slider-dots');
         $slider.slick({
           slidesToShow: 1,
           arrows: true,
           prevArrow: $prev,
           nextArrow: $next,
           dots: true,
-          appendDots: $dots
-        });
-      });
-    }
-  }, {
-    key: "tripleSliderInit",
-    value: function tripleSliderInit() {
-      var t = this;
-      $(document).find('.slider-triple').each(function () {
-        var $slider = $(this);
-        var $prev = $(this).closest('section').find('.slick__prev');
-        var $next = $(this).closest('section').find('.slick__next');
-        var $dots = $(this).closest('section').find('.slider-dots');
-        $slider.slick({
-          slidesToShow: 3,
-          arrows: true,
-          prevArrow: $prev,
-          nextArrow: $next,
-          dots: true,
-          appendDots: $dots,
-          responsive: [{
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 2
-            }
-          }, {
-            breakpoint: 700,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1
-            }
-          }]
+          centerMode: true
         });
       });
     }
   }, {
     key: "init",
     value: function init() {
-      change_sbi_images_html();
-      this.headSliderInit();
-      this.tripleSliderInit();
+      var custom = new CustomSlider();
     }
   }]);
 }();
 
-function change_sbi_images_html() {
-  $(document).find('.instagram-posts').each(function () {
-    var $wrap = $(this);
-    var html = '';
-    var $items = $wrap.find('.sbi_photo');
-    $items.each(function () {
-      var $item = $(this);
-      var href = $item.attr('href');
-      var src = $item.attr('data-full-res');
-      var temp = "\n             <div>\n                        <div class=\"instagram-post\" >\n                            <a href=\"".concat(href, "\" class=\"instagram-post__image\" style=\"display:block;\">\n                                <img src=\"").concat(src, "\" class=\"cover\" alt=\"\">\n                            </a>\n                        </div>\n                    </div>\n            ");
-      html = html + temp;
-    });
-    if (html) {
-      $wrap.addClass('slider-triple');
-      $wrap.html(html);
+var CustomSlider = /*#__PURE__*/function () {
+  function CustomSlider() {
+    _classCallCheck(this, CustomSlider);
+    this.init();
+  }
+  return _createClass(CustomSlider, [{
+    key: "getCurrentIndex",
+    value: function getCurrentIndex($slider) {
+      return $slider.find('.cases-item.current').index();
     }
-  });
-}
+  }, {
+    key: "setCurrentElemByIndex",
+    value: function setCurrentElemByIndex($slider) {
+      var index = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      $slider.find('.cases-item').removeClass('current');
+      $slider.find('.cases-item').eq(index).addClass('current');
+      return $slider.find('.cases-item').eq(index);
+    }
+  }, {
+    key: "elementDisplacement",
+    value: function elementDisplacement($slider, offset) {
+      $slider.find('.cases-item').css('transform', "matrix(1, 0, 0, 1, -".concat(offset, ", 0)"));
+    }
+  }, {
+    key: "movement",
+    value: function movement($slider) {
+      var index = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var gap = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+      var w = $slider.find('.cases-item').eq(index).outerWidth() + gap;
+      var offset = w * index;
+      this.elementDisplacement($slider, offset);
+      this.setCurrentElemByIndex($slider, index);
+    }
+  }, {
+    key: "getTransformX",
+    value: function getTransformX($el) {
+      var element = $el[0];
+      var style = window.getComputedStyle(element);
+      var transformValue = style.transform;
+      var matrix = transformValue.match(/matrix\(([^,]+), ([^,]+), ([^,]+), ([^,]+), ([^,]+), ([^)]+)\)/);
+      if (matrix) {
+        return parseFloat(matrix[5]);
+      }
+      return 0;
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      var _this = this;
+      var swipeThreshold = 50;
+      $(document).find('.cases-list').each(function () {
+        var $slider = $(this);
+        var swipeArea = $slider[0];
+        var currentIndex = 0;
+        var gap = $slider.css('gap');
+        gap = parseInt(gap);
+        gap = isNaN(gap) ? 0 : gap;
+        var $prev = $slider.closest('section').find('.slick__prev');
+        var $next = $slider.closest('section').find('.slick__next');
+        _this.setCurrentElemByIndex($slider, 0);
+        $prev.on('click', function (e) {
+          e.preventDefault();
+          currentIndex = _this.getCurrentIndex($slider);
+          if (currentIndex === 0) return;
+          var index = currentIndex - 1;
+          _this.movement($slider, index, gap);
+        });
+        $next.on('click', function (e) {
+          e.preventDefault();
+          currentIndex = _this.getCurrentIndex($slider);
+          if (currentIndex === $slider.find('.cases-item').length - 1) return;
+          var index = currentIndex + 1;
+          _this.movement($slider, index, gap);
+        });
+      });
+    }
+  }]);
+}();
 
 /***/ }),
 
