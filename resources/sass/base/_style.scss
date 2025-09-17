@@ -419,6 +419,39 @@ em, i {
   }
 }
 
+.slick {
+  &-dots {
+    gap: 0.8rem;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: -2.4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    li {
+      button{
+        display: none;
+      }
+
+      margin: 0;
+      padding: 0;
+      width: 0.8rem;
+      height: 0.8rem;
+      flex-grow: 0;
+      flex-shrink: 0;
+      display: block;
+      border-radius: 50%;
+      background-color: rgba(215, 215, 230, 0.50);
+      transition: 0.6s ease-in-out;
+
+      &.slick-active {
+        background-color: #9935BA;
+      }
+    }
+  }
+}
+
 .custom-slider {
   &-wrapper {
     position: relative;
@@ -433,7 +466,8 @@ em, i {
     border-radius: 50%;
     background-color: rgba(215, 215, 230, 0.50);
     transition: 0.6s ease-in-out;
-    &.active{
+
+    &.active {
       background-color: #9935BA;
     }
   }

@@ -25016,27 +25016,41 @@ var Slick = /*#__PURE__*/function () {
     this.init();
   }
   return _createClass(Slick, [{
-    key: "headSliderInit",
-    value: function headSliderInit() {
-      var t = this;
-      $(document).find('.cases-list').each(function () {
+    key: "handleBrandSlider",
+    value: function handleBrandSlider() {
+      $('.brands-list').each(function () {
         var $slider = $(this);
-        var $prev = $(this).closest('section').find('.slick__prev');
-        var $next = $(this).closest('section').find('.slick__next');
-        $slider.slick({
-          slidesToShow: 1,
-          arrows: true,
-          prevArrow: $prev,
-          nextArrow: $next,
-          dots: true,
-          centerMode: true
-        });
+        if ($(window).width() <= 768) {
+          if (!$slider.hasClass('slick-initialized')) {
+            $slider.slick({
+              slidesToShow: 3,
+              slidesToScroll: 3,
+              arrows: false,
+              dots: true,
+              responsive: [{
+                breakpoint: 450,
+                settings: {
+                  slidesToShow: 2,
+                  slidesToScroll: 2
+                }
+              }]
+            });
+          }
+        } else {
+          setTimeout(function () {
+            if ($slider.hasClass('slick-initialized')) {
+              $slider.slick('unslick');
+            }
+          }, 100);
+        }
       });
     }
   }, {
     key: "init",
     value: function init() {
       var custom = new CustomSlider();
+      this.handleBrandSlider();
+      $(window).on('resize', this.handleBrandSlider);
     }
   }]);
 }();

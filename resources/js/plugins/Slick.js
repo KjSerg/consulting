@@ -5,28 +5,43 @@ export default class Slick {
         this.init();
     }
 
-    headSliderInit() {
-        const t = this;
-        $(document).find('.cases-list').each(function () {
+    handleBrandSlider() {
+        $('.brands-list').each(function () {
             const $slider = $(this);
-            const $prev = $(this).closest('section').find('.slick__prev');
-            const $next = $(this).closest('section').find('.slick__next');
-            $slider.slick({
-                slidesToShow: 1,
-                arrows: true,
-                prevArrow: $prev,
-                nextArrow: $next,
-                dots: true,
-                centerMode: true
-            });
+            if ($(window).width() <= 768) {
+                if (!$slider.hasClass('slick-initialized')) {
+                    $slider.slick({
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        arrows: false,
+                        dots: true,
+                        responsive: [
+                            {
+                                breakpoint: 450,
+                                settings: {
+                                    slidesToShow: 2,
+                                    slidesToScroll: 2
+                                }
+                            },
+                        ]
+                    });
+                }
+            } else {
+                setTimeout(function () {
+                    if ($slider.hasClass('slick-initialized')) {
+                        $slider.slick('unslick');
+                    }
+                }, 100);
 
-
+            }
         });
     }
 
 
     init() {
         const custom = new CustomSlider();
+        this.handleBrandSlider();
+        $(window).on('resize', this.handleBrandSlider);
     }
 }
 
@@ -44,7 +59,7 @@ class CustomSlider {
         const $dots = $slider.closest('.custom-slider-wrapper').find('.custom-slider__dots');
         $slider.find('.cases-item').removeClass('current');
         $slider.find('.cases-item').eq(index).addClass('current');
-        if($dots.length > 0){
+        if ($dots.length > 0) {
             $dots.find('.custom-slider__dot').removeClass('active');
             $dots.find('.custom-slider__dot').eq(index).addClass('active');
         }
@@ -93,7 +108,7 @@ class CustomSlider {
         let html = '';
         for (let a = 0; a < length; a++) {
             let cls = a === 0 ? 'active' : '';
-            html += '<span class="custom-slider__dot '+cls+'"></span>';
+            html += '<span class="custom-slider__dot ' + cls + '"></span>';
         }
         html = '<span class="custom-slider__dots">' + html + '</span>';
         let $wrapper = $slider.closest('section').find('.custom-slider-wrapper');
@@ -136,7 +151,7 @@ class CustomSlider {
                 _this.movement($slider, index, gap);
             });
         });
-        $(document).on('click','.custom-slider__dot', function (e) {
+        $(document).on('click', '.custom-slider__dot', function (e) {
             e.preventDefault();
             const $t = $(this);
             const $slider = $t.closest('.section').find('.custom-slider');
