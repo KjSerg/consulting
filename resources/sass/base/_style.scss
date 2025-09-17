@@ -160,20 +160,6 @@ em, i {
   background-position: top center;
   color: #fff;
 
-  &-head {
-    margin-bottom: 5rem;
-    display: flex;
-    justify-content: space-between;
-    gap: 2rem;
-    align-items: center;
-    @media (max-width: 768px) {
-      margin-bottom: 2.4rem;
-      align-items: flex-start;
-      flex-direction: column-reverse;
-      gap: 0.8rem;
-    }
-  }
-
   &__subtitle {
     &:not(:last-child) {
 
@@ -227,6 +213,29 @@ em, i {
     @media (max-width: 768px) {
       font-size: 3.2rem;
       line-height: 4.6rem;
+    }
+  }
+
+  &-head {
+    margin-bottom: 5rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    align-items: center;
+
+    & > * {
+      margin-bottom: 0;
+
+      &:not(:last-child) {
+        margin-bottom: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      margin-bottom: 2.4rem;
+      align-items: flex-start;
+      flex-direction: column-reverse;
+      gap: 0.8rem;
     }
   }
 
@@ -378,8 +387,8 @@ em, i {
   align-items: center;
 }
 
-.slider{
-  &__prev, &__next{
+.slider {
+  &__prev, &__next {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -389,16 +398,55 @@ em, i {
     height: 6.4rem;
     gap: 1.2rem;
     opacity: 0.35;
-    &:hover, &:active{
+    @media (max-width: 450px) {
+      width: 2.2rem;
+      height: 2.2rem;
+    }
+
+    &:hover, &:active {
       opacity: 1;
     }
   }
-  &-controls{
+
+  &-controls {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
+    @media (max-width: 450px) {
+      gap: 2.4rem;
+    }
+  }
+}
 
+.custom-slider {
+  &-wrapper {
+    position: relative;
+  }
+
+  &__dot {
+    width: 0.8rem;
+    height: 0.8rem;
+    flex-grow: 0;
+    flex-shrink: 0;
+    display: block;
+    border-radius: 50%;
+    background-color: rgba(215, 215, 230, 0.50);
+    transition: 0.6s ease-in-out;
+    &.active{
+      background-color: #9935BA;
+    }
+  }
+
+  &__dots {
+    gap: 0.8rem;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: -2.4rem;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
