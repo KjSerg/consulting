@@ -37,9 +37,45 @@ export default class Slick {
         });
     }
 
+    teamSliderInit() {
+        $(document).find('.team-slider').each(function () {
+            const $slider = $(this);
+            const $section = $slider.closest('section');
+            const $preview = $section.find('.team-slider-preview');
+            const slickArgs = {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: false,
+                dots: false,
+                responsive: [
+                    {
+                        breakpoint: 1201,
+                        settings: {
+                            dots: true,
+                        }
+                    },
+                ]
+            };
+            if($preview.length > 0){
+                slickArgs['asNavFor'] = $preview;
+                const slickPrevArgs = {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    arrows: false,
+                    dots: false,
+                    asNavFor: $slider,
+                    focusOnSelect: true
+                };
+                $preview.slick(slickPrevArgs);
+            }
+            $slider.slick(slickArgs);
+        });
+    }
+
 
     init() {
         const custom = new CustomSlider();
+        this.teamSliderInit();
         this.handleBrandSlider();
         $(window).on('resize', this.handleBrandSlider);
     }

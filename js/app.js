@@ -25046,9 +25046,44 @@ var Slick = /*#__PURE__*/function () {
       });
     }
   }, {
+    key: "teamSliderInit",
+    value: function teamSliderInit() {
+      $(document).find('.team-slider').each(function () {
+        var $slider = $(this);
+        var $section = $slider.closest('section');
+        var $preview = $section.find('.team-slider-preview');
+        var slickArgs = {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: false,
+          dots: false,
+          responsive: [{
+            breakpoint: 1201,
+            settings: {
+              dots: true
+            }
+          }]
+        };
+        if ($preview.length > 0) {
+          slickArgs['asNavFor'] = $preview;
+          var slickPrevArgs = {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            arrows: false,
+            dots: false,
+            asNavFor: $slider,
+            focusOnSelect: true
+          };
+          $preview.slick(slickPrevArgs);
+        }
+        $slider.slick(slickArgs);
+      });
+    }
+  }, {
     key: "init",
     value: function init() {
       var custom = new CustomSlider();
+      this.teamSliderInit();
       this.handleBrandSlider();
       $(window).on('resize', this.handleBrandSlider);
     }
