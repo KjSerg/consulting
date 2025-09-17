@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="../Quadsystems/resources/sass/forms.scss">
 </head>
 <body>
 <header class="header">
@@ -180,7 +181,7 @@
                             business-partner in the Gulf and beyond
                         </p>
                     </div>
-                    <a href="#" class="main-footer__button custom-button">
+                    <a href="#modal" class="open-custom-modal main-footer__button custom-button">
                     <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="14"
                                             viewBox="0 0 15 14" fill="none">
   <path d="M12.6323 0C13.6636 0 14.4997 0.831029 14.4997 1.85616V6.9348C14.4997 7.86027 13.7449 8.6105 12.8139 8.6105C11.8828 8.6105 11.1281 7.86027 11.1281 6.9348V4.74351C11.1136 3.98071 10.495 3.36578 9.72758 3.35139H7.57495C6.64391 3.35139 5.88916 2.60116 5.88916 1.6757C5.88916 0.750235 6.64391 0 7.57495 0L12.6323 0Z"
@@ -966,6 +967,61 @@
     </div>
 </footer>
 <div class="modals">
+    <div class="modal" id="modal">
+        <div class="modal__subtitle">COOPERATION</div>
+        <div class="modal__title">Talk to Shift about a project</div>
+        <div class="modal__text text">
+            <p>
+                I agree to subscribtion to receive Shift's latest insights, research updates, and event announcements. No spam, unsubscribe anytime
+            </p>
+        </div>
+        <div class="modal-form">
+            <form class="form">
+                <label class="form-label half">
+                    <span class="form-label__title">Email*</span>
+                    <input type="email" required placeholder="Email*">
+                </label>
+                <label class="form-label half">
+                    <span class="form-label__title">Phone*</span>
+                    <input type="tel" required placeholder="Phone*">
+                </label>
+                <label class="form-label half">
+                    <span class="form-label__title">First name*</span>
+                    <input type="text" required placeholder="First name*">
+                </label>
+                <label class="form-label half">
+                    <span class="form-label__title">Last name*</span>
+                    <input type="text" required placeholder="Last name*">
+                </label>
+                <label class="form-label half">
+                    <span class="form-label__title">Organization*</span>
+                    <input type="text" required placeholder="Organization*">
+                </label>
+                <label class="form-label half">
+                    <span class="form-label__title">Industry*</span>
+                    <select class="select">
+                        <option value="" selected disabled>Industry</option>
+                        <option value="Industry1">Industry1</option>
+                        <option value="Industry2">Industry2</option>
+                    </select>
+                </label>
+                <label class="form-label ">
+                    <span class="form-label__title">Short description of what you want to discuss</span>
+                    <textarea placeholder="Your message"></textarea>
+                </label>
+                <button>
+                    <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="14"
+                                            viewBox="0 0 15 14" fill="none">
+  <path d="M12.6323 0C13.6636 0 14.4997 0.831029 14.4997 1.85616V6.9348C14.4997 7.86027 13.7449 8.6105 12.8139 8.6105C11.8828 8.6105 11.1281 7.86027 11.1281 6.9348V4.74351C11.1136 3.98071 10.495 3.36578 9.72758 3.35139H7.57495C6.64391 3.35139 5.88916 2.60116 5.88916 1.6757C5.88916 0.750235 6.64391 0 7.57495 0L12.6323 0Z"
+        fill="white"/>
+  <path d="M7.24365 5.3895C8.27495 5.3895 9.11099 6.22053 9.11099 7.24565V12.3243C9.11099 13.2498 8.35623 14 7.4252 14C6.49416 14 5.73941 13.2498 5.73941 12.3243V10.133C5.72493 9.3702 5.1063 8.75528 4.3389 8.74089H2.18628C1.25524 8.74089 0.500488 7.99065 0.500488 7.06519C0.500488 6.13973 1.25524 5.3895 2.18628 5.3895H7.24365Z"
+        fill="white"/>
+</svg></span>
+                    Send message
+                </button>
+            </form>
+        </div>
+    </div>
     <div class="modal modal--dialog" id="dialog">
         <div class="modal__title"></div>
         <div class="modal__text text"></div>
