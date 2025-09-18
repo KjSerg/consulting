@@ -25356,6 +25356,30 @@ var Slick = /*#__PURE__*/function () {
       });
     }
   }, {
+    key: "handleExpertsSlider",
+    value: function handleExpertsSlider() {
+      $('.experts-list').each(function () {
+        var $slider = $(this);
+        if ($(window).width() <= 600) {
+          if (!$slider.hasClass('slick-initialized')) {
+            $slider.slick({
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              arrows: false,
+              dots: true,
+              responsive: []
+            });
+          }
+        } else {
+          setTimeout(function () {
+            if ($slider.hasClass('slick-initialized')) {
+              $slider.slick('unslick');
+            }
+          }, 100);
+        }
+      });
+    }
+  }, {
     key: "teamSliderInit",
     value: function teamSliderInit() {
       $(document).find('.team-slider').each(function () {
@@ -25390,12 +25414,43 @@ var Slick = /*#__PURE__*/function () {
       });
     }
   }, {
+    key: "quotesSliderInit",
+    value: function quotesSliderInit() {
+      $(document).find('.quotes-list').each(function () {
+        var $slider = $(this);
+        var $section = $slider.closest('section');
+        var $prev = $section.find('.slick__prev');
+        var $next = $section.find('.slick__next');
+        var slickArgs = {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: true,
+          prevArrow: $prev,
+          nextArrow: $next,
+          dots: false,
+          responsive: [{
+            breakpoint: 451,
+            settings: {
+              dots: true
+            }
+          }]
+        };
+        $slider.slick(slickArgs);
+      });
+    }
+  }, {
     key: "init",
     value: function init() {
+      var _this = this;
+      _this.teamSliderInit();
+      _this.handleBrandSlider();
+      _this.handleExpertsSlider();
+      _this.quotesSliderInit();
+      $(window).on('resize', function () {
+        _this.handleBrandSlider();
+        _this.handleExpertsSlider();
+      });
       var custom = new CustomSlider();
-      this.teamSliderInit();
-      this.handleBrandSlider();
-      $(window).on('resize', this.handleBrandSlider);
     }
   }]);
 }();

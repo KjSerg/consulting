@@ -36,6 +36,31 @@ export default class Slick {
             }
         });
     }
+    handleExpertsSlider() {
+        $('.experts-list').each(function () {
+            const $slider = $(this);
+            if ($(window).width() <= 600) {
+                if (!$slider.hasClass('slick-initialized')) {
+                    $slider.slick({
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        arrows: false,
+                        dots: true,
+                        responsive: [
+
+                        ]
+                    });
+                }
+            } else {
+                setTimeout(function () {
+                    if ($slider.hasClass('slick-initialized')) {
+                        $slider.slick('unslick');
+                    }
+                }, 100);
+
+            }
+        });
+    }
 
     teamSliderInit() {
         $(document).find('.team-slider').each(function () {
@@ -71,13 +96,44 @@ export default class Slick {
             $slider.slick(slickArgs);
         });
     }
+    quotesSliderInit() {
+        $(document).find('.quotes-list').each(function () {
+            const $slider = $(this);
+            const $section = $slider.closest('section');
+            const $prev = $section.find('.slick__prev');
+            const $next = $section.find('.slick__next');
+            const slickArgs = {
+                slidesToShow: 1,
+                slidesToScroll: 1,
 
+                arrows: true,
+                prevArrow: $prev,
+                nextArrow: $next,
+                dots: false,
+                responsive: [
+                    {
+                        breakpoint: 451,
+                        settings: {
+                            dots: true,
+                        }
+                    },
+                ]
+            };
+            $slider.slick(slickArgs);
+        });
+    }
 
     init() {
+        const _this = this;
+        _this.teamSliderInit();
+        _this.handleBrandSlider();
+        _this.handleExpertsSlider();
+        _this.quotesSliderInit();
+        $(window).on('resize', function (){
+            _this.handleBrandSlider()
+            _this.handleExpertsSlider()
+        });
         const custom = new CustomSlider();
-        this.teamSliderInit();
-        this.handleBrandSlider();
-        $(window).on('resize', this.handleBrandSlider);
     }
 }
 

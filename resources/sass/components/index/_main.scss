@@ -32,6 +32,11 @@
         font-weight: 500;
         line-height: 2.8rem;
       }
+      br{
+        @media (max-width: 450px) {
+          display: none;
+        }
+      }
     }
   }
 
