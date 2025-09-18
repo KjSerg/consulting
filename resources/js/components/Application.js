@@ -10,6 +10,7 @@ import {tabs} from "./ui/_tabs";
 import {sendRequestClickListener} from "./ui/_request-on-click";
 import {initEventsListener} from "./ui/_modals";
 import FormHandler from "./forms/FormHandler";
+import {videoPlayer} from "./ui/_videoPlayer";
 
 
 export default class Application {
@@ -50,6 +51,7 @@ export default class Application {
             selectrickInit();
             fancyboxInit();
             initEventsListener();
+            videoPlayer();
             this.showLoaderOnClick();
             this.linkListener();
             const slider = new Slick();
@@ -157,5 +159,6 @@ export default class Application {
             $(document).find('.sub-container-wrapper').removeClass('active');
             $('body').removeClass('open-sub-container-wrapper');
         });
+
     }
 }

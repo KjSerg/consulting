@@ -88,26 +88,26 @@ class CustomSlider {
     }
 
     getCurrentIndex($slider) {
-        return $slider.find('.cases-item.current').index();
+        return $slider.find('.custom-slider__item.current').index();
     }
 
     setCurrentElemByIndex($slider, index = 0) {
         const $dots = $slider.closest('.custom-slider-wrapper').find('.custom-slider__dots');
-        $slider.find('.cases-item').removeClass('current');
-        $slider.find('.cases-item').eq(index).addClass('current');
+        $slider.find('.custom-slider__item').removeClass('current');
+        $slider.find('.custom-slider__item').eq(index).addClass('current');
         if ($dots.length > 0) {
             $dots.find('.custom-slider__dot').removeClass('active');
             $dots.find('.custom-slider__dot').eq(index).addClass('active');
         }
-        return $slider.find('.cases-item').eq(index);
+        return $slider.find('.custom-slider__item').eq(index);
     }
 
     elementDisplacement($slider, offset) {
-        $slider.find('.cases-item').css('transform', `matrix(1, 0, 0, 1, -${offset}, 0)`);
+        $slider.find('.custom-slider__item').css('transform', `matrix(1, 0, 0, 1, -${offset}, 0)`);
     }
 
     movement($slider, index = 0, gap = 0) {
-        const w = $slider.find('.cases-item').eq(index).outerWidth() + gap;
+        const w = $slider.find('.custom-slider__item').eq(index).outerWidth() + gap;
         const offset = w * index;
         this.elementDisplacement($slider, offset);
         this.setCurrentElemByIndex($slider, index);
@@ -139,7 +139,7 @@ class CustomSlider {
     }
 
     addDots($slider) {
-        const length = $slider.find('.cases-item').length;
+        const length = $slider.find('.custom-slider__item').length;
         if (length === 0) return;
         let html = '';
         for (let a = 0; a < length; a++) {
@@ -173,7 +173,7 @@ class CustomSlider {
                 currentIndex = _this.getCurrentIndex($slider);
                 let index = currentIndex - 1;
                 if (currentIndex === 0) {
-                    index = $slider.find('.cases-item').length - 1;
+                    index = $slider.find('.custom-slider__item').length - 1;
                 }
                 _this.movement($slider, index, gap);
             });
@@ -181,9 +181,12 @@ class CustomSlider {
                 e.preventDefault();
                 currentIndex = _this.getCurrentIndex($slider);
                 let index = currentIndex + 1;
-                if (currentIndex === ($slider.find('.cases-item').length - 1)) {
+                if (currentIndex === ($slider.find('.custom-slider__item').length - 1)) {
                     index = 0;
                 }
+
+                console.log(currentIndex)
+                console.log(index)
                 _this.movement($slider, index, gap);
             });
         });

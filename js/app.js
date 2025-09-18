@@ -24329,6 +24329,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ui_request_on_click__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ui/_request-on-click */ "./resources/js/components/ui/_request-on-click.js");
 /* harmony import */ var _ui_modals__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./ui/_modals */ "./resources/js/components/ui/_modals.js");
 /* harmony import */ var _forms_FormHandler__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./forms/FormHandler */ "./resources/js/components/forms/FormHandler.js");
+/* harmony import */ var _ui_videoPlayer__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./ui/_videoPlayer */ "./resources/js/components/ui/_videoPlayer.js");
 /* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
@@ -24336,6 +24337,7 @@ function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = 
 function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+
 
 
 
@@ -24391,6 +24393,7 @@ var Application = /*#__PURE__*/function () {
         (0,_plugins_selectric_init__WEBPACK_IMPORTED_MODULE_6__.selectrickInit)();
         (0,_plugins_fancybox_init__WEBPACK_IMPORTED_MODULE_5__.fancyboxInit)();
         (0,_ui_modals__WEBPACK_IMPORTED_MODULE_10__.initEventsListener)();
+        (0,_ui_videoPlayer__WEBPACK_IMPORTED_MODULE_12__.videoPlayer)();
         _this.showLoaderOnClick();
         _this.linkListener();
         var slider = new _plugins_Slick__WEBPACK_IMPORTED_MODULE_7__["default"]();
@@ -24998,6 +25001,79 @@ var tabs = function tabs() {
 
 /***/ }),
 
+/***/ "./resources/js/components/ui/_videoPlayer.js":
+/*!****************************************************!*\
+  !*** ./resources/js/components/ui/_videoPlayer.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   videoPlayer: () => (/* binding */ videoPlayer)
+/* harmony export */ });
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+function videoPlayer() {
+  $(document).on('dblclick', 'video', toggleFullScreen);
+  $(document).on('click', 'video', function (e) {
+    var $t = $(this);
+    $t.closest('.video-section').removeClass('video-section-play');
+    $t.removeClass('playing');
+    $t.trigger('pause');
+  });
+  $(document).on('click', '.video-section__play', function (e) {
+    e.preventDefault();
+    var $t = $(this);
+    var href = $t.attr('href');
+    if (href === '#') return;
+    var $el = $(document).find('video' + href);
+    if ($el.length === 0) return;
+    $el.closest('.video-section').addClass('video-section-play');
+    $el.addClass('playing');
+    $el.trigger('play');
+    $el.closest('.video-container').addClass('playing');
+  });
+}
+function toggleFullScreen(e) {
+  var video = this;
+  var $video = $(video);
+  if (!document.fullscreenElement) {
+    if (video.requestFullscreen) {
+      video.requestFullscreen();
+    } else if (video.mozRequestFullScreen) {
+      // Firefox
+      video.mozRequestFullScreen();
+    } else if (video.webkitRequestFullscreen) {
+      // Chrome, Safari, Opera
+      video.webkitRequestFullscreen();
+    } else if (video.msRequestFullscreen) {
+      // IE/Edge
+      video.msRequestFullscreen();
+    }
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      // Firefox
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      // Chrome, Safari, Opera
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+      // IE/Edge
+      document.msExitFullscreen();
+    }
+    $('html, body').animate({
+      scrollTop: $video.offset().top
+    }, 500);
+    $video.closest('.video-section').removeClass('video-section-play');
+    $video.removeClass('playing');
+    $video.trigger('pause');
+  }
+}
+
+/***/ }),
+
 /***/ "./resources/js/components/utils/_helpers.js":
 /*!***************************************************!*\
   !*** ./resources/js/components/utils/_helpers.js ***!
@@ -25332,32 +25408,32 @@ var CustomSlider = /*#__PURE__*/function () {
   return _createClass(CustomSlider, [{
     key: "getCurrentIndex",
     value: function getCurrentIndex($slider) {
-      return $slider.find('.cases-item.current').index();
+      return $slider.find('.custom-slider__item.current').index();
     }
   }, {
     key: "setCurrentElemByIndex",
     value: function setCurrentElemByIndex($slider) {
       var index = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       var $dots = $slider.closest('.custom-slider-wrapper').find('.custom-slider__dots');
-      $slider.find('.cases-item').removeClass('current');
-      $slider.find('.cases-item').eq(index).addClass('current');
+      $slider.find('.custom-slider__item').removeClass('current');
+      $slider.find('.custom-slider__item').eq(index).addClass('current');
       if ($dots.length > 0) {
         $dots.find('.custom-slider__dot').removeClass('active');
         $dots.find('.custom-slider__dot').eq(index).addClass('active');
       }
-      return $slider.find('.cases-item').eq(index);
+      return $slider.find('.custom-slider__item').eq(index);
     }
   }, {
     key: "elementDisplacement",
     value: function elementDisplacement($slider, offset) {
-      $slider.find('.cases-item').css('transform', "matrix(1, 0, 0, 1, -".concat(offset, ", 0)"));
+      $slider.find('.custom-slider__item').css('transform', "matrix(1, 0, 0, 1, -".concat(offset, ", 0)"));
     }
   }, {
     key: "movement",
     value: function movement($slider) {
       var index = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       var gap = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-      var w = $slider.find('.cases-item').eq(index).outerWidth() + gap;
+      var w = $slider.find('.custom-slider__item').eq(index).outerWidth() + gap;
       var offset = w * index;
       this.elementDisplacement($slider, offset);
       this.setCurrentElemByIndex($slider, index);
@@ -25391,7 +25467,7 @@ var CustomSlider = /*#__PURE__*/function () {
   }, {
     key: "addDots",
     value: function addDots($slider) {
-      var length = $slider.find('.cases-item').length;
+      var length = $slider.find('.custom-slider__item').length;
       if (length === 0) return;
       var html = '';
       for (var a = 0; a < length; a++) {
@@ -25426,7 +25502,7 @@ var CustomSlider = /*#__PURE__*/function () {
           currentIndex = _this.getCurrentIndex($slider);
           var index = currentIndex - 1;
           if (currentIndex === 0) {
-            index = $slider.find('.cases-item').length - 1;
+            index = $slider.find('.custom-slider__item').length - 1;
           }
           _this.movement($slider, index, gap);
         });
@@ -25434,9 +25510,11 @@ var CustomSlider = /*#__PURE__*/function () {
           e.preventDefault();
           currentIndex = _this.getCurrentIndex($slider);
           var index = currentIndex + 1;
-          if (currentIndex === $slider.find('.cases-item').length - 1) {
+          if (currentIndex === $slider.find('.custom-slider__item').length - 1) {
             index = 0;
           }
+          console.log(currentIndex);
+          console.log(index);
           _this.movement($slider, index, gap);
         });
       });

@@ -315,6 +315,11 @@ em, i {
   font-style: normal;
   font-weight: 400;
   line-height: 3.6rem;
+
+  & > *:not(:last-child){
+    margin-bottom: 2rem;
+  }
+
   @media (max-width: 450px) {
     font-size: 1.6rem;
     line-height: 2.8rem;
@@ -338,6 +343,10 @@ em, i {
     font-weight: 500;
     line-height: 7rem;
     text-transform: uppercase;
+    @media (max-width: 450px) {
+      font-size: 3.2rem;
+      line-height: 4.6rem;
+    }
   }
 
   h1 {
@@ -484,6 +493,11 @@ em, i {
     bottom: -2.4rem;
     left: 50%;
     transform: translateX(-50%);
+  }
+
+  &__item{
+    transition: 0.6s ease-in-out transform;
+    will-change: transform;
   }
 }
 

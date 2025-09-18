@@ -159,25 +159,36 @@
         </nav>
 
     </div>
+    <div class="container">
+        <div class="breadcrumbs">
+            <a href="#">HOME
+                <span>/</span>
+            </a>
+            <span>ABOUT US</span>
+        </div>
+    </div>
 </header>
 <main class="content">
     <section class="section main-section ">
-        <div class="main-section__video">
-            <video src="video/videp.mp4" loop autoplay="autoplay" muted poster="img/main-background.png"></video>
+        <div class="section__background">
+            <picture>
+                <source srcset="img/about-main-bg.jpg" media="(min-width: 451px)"/>
+                <img src="img/about-main-bg-m.jpg" alt="">
+            </picture>
+
         </div>
         <div class="container">
             <div class="main-container">
                 <div class="main__title">
                     <h1>
-                        <span class="border">Marketing</span>
-                        <span>That Works</span>
+                        <span class="border">SHIFT</span>
+                        <span>Middle East</span>
                     </h1>
                 </div>
                 <div class="main-footer">
                     <div class="main-footer__text text">
                         <p>
-                            Your end-to-end consulting <br>
-                            business-partner in the Gulf and beyond
+                            Based in the Gulf, built for the Gulf — but able to take <br> you beyond it.
                         </p>
                     </div>
                     <a href="#modal" class="open-custom-window main-footer__button custom-button">
@@ -204,48 +215,97 @@
         </div>
         <div class="container">
             <div class="about-section-row">
-                <div class="about-section-head">
+                <div class="about-section-head about-section-head--long">
                     <div class="about-section__subtitle">
-                        ABOUT US
+                        EXPERTISE IN ACTION
                     </div>
-                    <div class="about-section__image">
-                        <img src="img/AboutColumn.svg" alt="">
+                    <div class="about-section__image about-section__image--low">
+                        <img src="img/shift.svg" alt="">
                     </div>
                 </div>
                 <div class="about-section-content">
-                    <div class="about-section__text ">
+                    <div class="about-section__text text">
                         <p>
-                            An international agency with deep respect for local culture and business practices. Shift
-                            helps Middle Eastern companies scale effectively, enter new markets, and prepare for
-                            long-term growth — from Vision 2030 to cross-border expansion into the CIS region.
+                            Shift is an international consulting agency. Our Middle East office is built around local
+                            markets and ways of doing business.
                         </p>
-                    </div>
-                    <a href="#thank-you-modal" class="about-section__button open-custom-window custom-button">
-                    <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="14"
-                                            viewBox="0 0 15 14" fill="none">
-  <path d="M12.6323 0C13.6636 0 14.4997 0.831029 14.4997 1.85616V6.9348C14.4997 7.86027 13.7449 8.6105 12.8139 8.6105C11.8828 8.6105 11.1281 7.86027 11.1281 6.9348V4.74351C11.1136 3.98071 10.495 3.36578 9.72758 3.35139H7.57495C6.64391 3.35139 5.88916 2.60116 5.88916 1.6757C5.88916 0.750235 6.64391 0 7.57495 0L12.6323 0Z"
-        fill="white"/>
-  <path d="M7.24365 5.3895C8.27495 5.3895 9.11099 6.22053 9.11099 7.24565V12.3243C9.11099 13.2498 8.35623 14 7.4252 14C6.49416 14 5.73941 13.2498 5.73941 12.3243V10.133C5.72493 9.3702 5.1063 8.75528 4.3389 8.74089H2.18628C1.25524 8.74089 0.500488 7.99065 0.500488 7.06519C0.500488 6.13973 1.25524 5.3895 2.18628 5.3895H7.24365Z"
-        fill="white"/>
-</svg></span>
-                        Discover our story
-                    </a>
-                    <div class="about-section-footer">
-                        <div class="about-section-footer__item">
-                            <p>
-                                OFFICES <br>
-                                DUBAI - MINSK - ASTANA
-                            </p>
-                        </div>
-                        <div class="about-section-footer__item">
-                            <p>
-                                OVER 70 BRANDS <br>
-                                TRANSFORMED
-                            </p>
-                        </div>
+                        <p>
+                            We’re a results-driven transformation partner helping Middle Eastern companies scale smart,
+                            expand into new markets, and align with the future — from Vision 2030 priorities to
+                            cross-border growth across the CIS.
+                        </p>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+    <section class="section video-section padding-bottom-none padding-top-none">
+        <video src="video/videp.mp4" id="video-section-file" poster="img/video-poster.jpg"></video>
+        <div class="video-section-overlay">
+            <a href="#video-section-file" class="video-section__play"><img src="img/play.svg" alt=""></a>
+            <div class="video-section-footer">
+                <div class="container">
+                    <div class="video-section__text text">
+                        <p>
+                            WHAT DRIVES
+
+                        </p>
+                        <p>
+                            SHIFT FORWARD
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section principles-section">
+        <div class="section__background">
+            <picture>
+
+                <source srcset="img/principles-section-bg.png" media="(min-width: 451px)"/>
+                <img src="img/principles-section-bg-mobile.png" alt="">
+            </picture>
+        </div>
+        <div class="container">
+            <div class="principles-section-head">
+                <div class="section__title principles-section__title">
+                    <h6>What Makes Us Unique?</h6>
+                </div>
+                <div class="section__subtitle principles-section__subtitle">
+                    <h6>OUR PRINCIPLES</h6>
+                </div>
+            </div>
+            <ul class="principles-list">
+                <li class="principles-list-item principles-list-item--third">
+                    <div class="icon"><img src="img/Union.svg" alt=""></div>
+                    <div class="principles-list-item__title">Cultural Intelligence</div>
+                </li>
+                <li class="principles-list-item principles-list-item--third principles-list-item--green">
+                    <div class="icon"><img src="img/cadence.svg" alt=""></div>
+                    <div class="principles-list-item__title">Purposeful Communication</div>
+                </li>
+                <li class="principles-list-item principles-list-item--third principles-list-item--blue">
+                    <div class="icon"><img src="img/sensor_occupied.svg" alt=""></div>
+                    <div class="principles-list-item__title">Ownership in Results</div>
+                </li>
+                <li class="principles-list-item principles-list-item--green">
+                    <div class="icon"><img src="img/highlight_keyboard_focus.svg" alt=""></div>
+                    <div class="principles-list-item__title">Discreet by default</div>
+                </li>
+                <li class="principles-list-item">
+                    <div class="icon"><img src="img/token.svg" alt=""></div>
+                    <div class="principles-list-item__title">Built for Your Reality</div>
+                </li>
+                <li class="principles-list-item principles-list-item--blue">
+                    <div class="icon"><img src="img/center_focus_weak.svg" alt=""></div>
+                    <div class="principles-list-item__title">Honest by design</div>
+                </li>
+                <li class="principles-list-item principles-list-item--green">
+                    <div class="icon"><img src="img/stairs_2.svg" alt=""></div>
+                    <div class="principles-list-item__title">With You All the Way</div>
+                </li>
+            </ul>
         </div>
     </section>
     <section class="section services-section section--white">
@@ -257,7 +317,7 @@
                     </div>
                     <div class="section__title services-section__title">
                         <h2>
-                            Our Services
+                            SERVICES WE OFFER
                         </h2>
                     </div>
                     <div class="text services-section__text">
@@ -468,59 +528,61 @@
             </div>
         </div>
     </section>
-    <section class="section principles-section">
+
+    <section class="section exclusive-section">
         <div class="section__background">
             <picture>
-
-                <source srcset="img/principles-section-bg.png" media="(min-width: 451px)"/>
-                <img src="img/principles-section-bg-mobile.png" alt="">
+                <source srcset="img/exclusive-section-bg.png" media="(min-width: 451px)"/>
+                <img src="img/exclusive-section-bg-m.jpg" alt="">
             </picture>
+
         </div>
         <div class="container">
-            <div class="principles-section-head">
-                <div class="section__title principles-section__title">
-                    <h6>What Makes Us Unique?</h6>
+            <div class="exclusive-section-row">
+                <div class="exclusive-section-head">
+                    <div class="section__subtitle">
+                        EXCLUSIVE SERVICE
+                    </div>
+                    <div class="exclusive-section__image">
+                        <img src="img/exclusive.svg" alt="">
+                    </div>
                 </div>
-                <div class="section__subtitle principles-section__subtitle">
-                    <h6>OUR PRINCIPLES</h6>
+                <div class="exclusive-section-content">
+                    <div class="exclusive-section__text text">
+                        <h2>Market entry and growth in CIS</h2>
+                        <p>
+                            An exclusive, end-to-end consultancy solution designed for ambitious Middle Eastern brands
+                            looking to enter and scale within the CIS region, including Russia, Kazakhstan, Uzbekistan,
+                            Armenia, Azerbaijan, Georgia, and others.
+                        </p>
+                        <p>
+                            An exclusive, end-to-end consultancy solution designed for ambitious Middle Eastern brands
+                            looking to enter and scale within the CIS region, including Russia, Kazakhstan, Uzbekistan,
+                            Armenia, Azerbaijan, Georgia, and others.
+                        </p>
+                    </div>
+                    <div class="exclusive-section-controls">
+                        <a href="#modal" class="open-custom-window exclusive-section__button custom-button">
+                    <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="14"
+                                            viewBox="0 0 15 14" fill="none">
+  <path d="M12.6323 0C13.6636 0 14.4997 0.831029 14.4997 1.85616V6.9348C14.4997 7.86027 13.7449 8.6105 12.8139 8.6105C11.8828 8.6105 11.1281 7.86027 11.1281 6.9348V4.74351C11.1136 3.98071 10.495 3.36578 9.72758 3.35139H7.57495C6.64391 3.35139 5.88916 2.60116 5.88916 1.6757C5.88916 0.750235 6.64391 0 7.57495 0L12.6323 0Z"
+        fill="white"/>
+  <path d="M7.24365 5.3895C8.27495 5.3895 9.11099 6.22053 9.11099 7.24565V12.3243C9.11099 13.2498 8.35623 14 7.4252 14C6.49416 14 5.73941 13.2498 5.73941 12.3243V10.133C5.72493 9.3702 5.1063 8.75528 4.3389 8.74089H2.18628C1.25524 8.74089 0.500488 7.99065 0.500488 7.06519C0.500488 6.13973 1.25524 5.3895 2.18628 5.3895H7.24365Z"
+        fill="white"/>
+</svg></span>
+                            Explore Service
+                        </a>
+                    </div>
                 </div>
             </div>
-            <ul class="principles-list">
-                <li class="principles-list-item principles-list-item--third">
-                    <div class="icon"><img src="img/Union.svg" alt=""></div>
-                    <div class="principles-list-item__title">Cultural Intelligence</div>
-                </li>
-                <li class="principles-list-item principles-list-item--third principles-list-item--green">
-                    <div class="icon"><img src="img/cadence.svg" alt=""></div>
-                    <div class="principles-list-item__title">Purposeful Communication</div>
-                </li>
-                <li class="principles-list-item principles-list-item--third principles-list-item--blue">
-                    <div class="icon"><img src="img/sensor_occupied.svg" alt=""></div>
-                    <div class="principles-list-item__title">Ownership in Results</div>
-                </li>
-                <li class="principles-list-item principles-list-item--green">
-                    <div class="icon"><img src="img/highlight_keyboard_focus.svg" alt=""></div>
-                    <div class="principles-list-item__title">Discreet by default</div>
-                </li>
-                <li class="principles-list-item">
-                    <div class="icon"><img src="img/token.svg" alt=""></div>
-                    <div class="principles-list-item__title">Built for Your Reality</div>
-                </li>
-                <li class="principles-list-item principles-list-item--blue">
-                    <div class="icon"><img src="img/center_focus_weak.svg" alt=""></div>
-                    <div class="principles-list-item__title">Honest by design</div>
-                </li>
-                <li class="principles-list-item principles-list-item--green">
-                    <div class="icon"><img src="img/stairs_2.svg" alt=""></div>
-                    <div class="principles-list-item__title">With You All the Way</div>
-                </li>
-            </ul>
         </div>
     </section>
-    <section class="section cases-section section--white">
+
+
+    <section class="section industries-section section--white">
         <div class="container">
-            <div class="section-head cases-section-head">
-                <div class="section__title cases-section__title">
+            <div class="section-head industries-section-head">
+                <div class="section__title cases-section__title industries-section__title">
                     <h5>Our Cases</h5>
                     <div class="slider-controls ">
                         <a href="#" class="slick__prev slider__prev">
@@ -531,106 +593,123 @@
                         </a>
                     </div>
                 </div>
-                <div class="section__subtitle cases-section__subtitle">
-                    <h6>BUSINESS IN ACTION</h6>
+                <div class="section__subtitle industries-section__subtitle">
+                    <h5>FIELDS OF EXPERTISE</h5>
                 </div>
             </div>
         </div>
-        <div class="cases-list custom-slider" data-clone="1">
-            <div class="cases-item custom-slider__item">
-                <div class="cases-item__image"><img src="img/case1.jpg" class="scale-on-hover cover" alt=""></div>
-                <div class="cases-item-content">
-                    <a href="#" class="cases-item__title">
-                        <span class="icon"><img src="img/1arrow_outward.svg" alt=""></span>
-                        Government-Endorsed National Energy Strategy
-                    </a>
-                    <div class="cases-item-details">
-                        <ul>
-                            <li>
-                                <strong>Client:</strong>
-                                <p>Major energy holding</p>
-                            </li>
-                            <li>
-                                <strong>What we did:</strong>
-                                <p>Developed a 10-year strategy and investment roadmap aligned with national vision
-                                    programs and secured federal approval.</p>
-                            </li>
-                            <li>
-                                <strong>Results:</strong>
-                                <p>3 investment scenarios, 40+ project initiatives, and tracked execution across the
-                                    group</p>
-                            </li>
-                        </ul>
+        <div class="custom-slider industries-list cases-list" data-clone="2">
+            <div class="custom-slider__item industries-list-item">
+                <div class="industries-list-item__image">
+                    <img src="img/industries-list-item__image.jpg" class="cover" alt="">
+                    <div class="industries-list-item-text">
+                        <div class="text">
+                            <p>We’ve worked inside energy companies facing pressure on all sides: aging infrastructure,
+                                regulatory shifts, ESG demands, and the need to innovate.</p>
+                            <p>From grid operators to new market entrants, we help teams navigate complexity and build
+                                what’s next. That means clear strategy, working systems, and momentum where it
+                                matters.</p>
+                        </div>
                     </div>
                 </div>
+                <a href="#" class="industries-list-item__title">
+                    <span class="icon"><img src="img/link.svg" alt=""></span>
+                    Energy
+                </a>
             </div>
-            <div class="cases-item custom-slider__item">
-                <div class="cases-item__image"><img src="img/case1.jpg" class="scale-on-hover cover" alt=""></div>
-                <div class="cases-item-content">
-                    <a href="#" class="cases-item__title">
-                        <span class="icon"><img src="img/1arrow_outward.svg" alt=""></span>
-                        Government-Endorsed National Energy Strategy
-                    </a>
-                    <div class="cases-item-details">
-                        <ul>
-                            <li>
-                                <strong>Client:</strong>
-                                <p>Major energy holding</p>
-                            </li>
-                            <li>
-                                <strong>What we did:</strong>
-                                <p>Developed a 10-year strategy and investment roadmap aligned with national vision
-                                    programs and secured federal approval.</p>
-                            </li>
-                            <li>
-                                <strong>Results:</strong>
-                                <p>3 investment scenarios, 40+ project initiatives, and tracked execution across the
-                                    group</p>
-                            </li>
-                        </ul>
+            <div class="custom-slider__item industries-list-item">
+                <div class="industries-list-item__image">
+                    <img src="img/industries-list-item__image.jpg" class="cover" alt="">
+                    <div class="industries-list-item-text">
+                        <div class="text">
+                            <p>We’ve worked inside energy companies facing pressure on all sides: aging infrastructure,
+                                regulatory shifts, ESG demands, and the need to innovate.</p>
+                            <p>From grid operators to new market entrants, we help teams navigate complexity and build
+                                what’s next. That means clear strategy, working systems, and momentum where it
+                                matters.</p>
+                        </div>
                     </div>
                 </div>
+                <a href="#" class="industries-list-item__title">
+                    <span class="icon"><img src="img/link.svg" alt=""></span>
+                    Energy
+                </a>
             </div>
-            <div class="cases-item custom-slider__item">
-                <div class="cases-item__image"><img src="img/case1.jpg" class="scale-on-hover cover" alt=""></div>
-                <div class="cases-item-content">
-                    <a href="#" class="cases-item__title">
-                        <span class="icon"><img src="img/1arrow_outward.svg" alt=""></span>
-                        Government-Endorsed National Energy Strategy
-                    </a>
-                    <div class="cases-item-details">
-                        <ul>
-                            <li>
-                                <strong>Client:</strong>
-                                <p>Major energy holding</p>
-                            </li>
-                            <li>
-                                <strong>What we did:</strong>
-                                <p>Developed a 10-year strategy and investment roadmap aligned with national vision
-                                    programs and secured federal approval.</p>
-                            </li>
-                            <li>
-                                <strong>Results:</strong>
-                                <p>3 investment scenarios, 40+ project initiatives, and tracked execution across the
-                                    group</p>
-                            </li>
-                        </ul>
+            <div class="custom-slider__item industries-list-item">
+                <div class="industries-list-item__image">
+                    <img src="img/industries-list-item__image.jpg" class="cover" alt="">
+                    <div class="industries-list-item-text">
+                        <div class="text">
+                            <p>We’ve worked inside energy companies facing pressure on all sides: aging infrastructure,
+                                regulatory shifts, ESG demands, and the need to innovate.</p>
+                            <p>From grid operators to new market entrants, we help teams navigate complexity and build
+                                what’s next. That means clear strategy, working systems, and momentum where it
+                                matters.</p>
+                        </div>
                     </div>
                 </div>
+                <a href="#" class="industries-list-item__title">
+                    <span class="icon"><img src="img/link.svg" alt=""></span>
+                    Energy
+                </a>
+            </div>
+            <div class="custom-slider__item industries-list-item">
+                <div class="industries-list-item__image">
+                    <img src="img/industries-list-item__image.jpg" class="cover" alt="">
+                    <div class="industries-list-item-text">
+                        <div class="text">
+                            <p>We’ve worked inside energy companies facing pressure on all sides: aging infrastructure,
+                                regulatory shifts, ESG demands, and the need to innovate.</p>
+                            <p>From grid operators to new market entrants, we help teams navigate complexity and build
+                                what’s next. That means clear strategy, working systems, and momentum where it
+                                matters.</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="industries-list-item__title">
+                    <span class="icon"><img src="img/link.svg" alt=""></span>
+                    Energy
+                </a>
+            </div>
+            <div class="custom-slider__item industries-list-item">
+                <div class="industries-list-item__image">
+                    <img src="img/industries-list-item__image.jpg" class="cover" alt="">
+                    <div class="industries-list-item-text">
+                        <div class="text">
+                            <p>We’ve worked inside energy companies facing pressure on all sides: aging infrastructure,
+                                regulatory shifts, ESG demands, and the need to innovate.</p>
+                            <p>From grid operators to new market entrants, we help teams navigate complexity and build
+                                what’s next. That means clear strategy, working systems, and momentum where it
+                                matters.</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="industries-list-item__title">
+                    <span class="icon"><img src="img/link.svg" alt=""></span>
+                    Energy
+                </a>
+            </div>
+            <div class="custom-slider__item industries-list-item">
+                <div class="industries-list-item__image">
+                    <img src="img/industries-list-item__image.jpg" class="cover" alt="">
+                    <div class="industries-list-item-text">
+                        <div class="text">
+                            <p>We’ve worked inside energy companies facing pressure on all sides: aging infrastructure,
+                                regulatory shifts, ESG demands, and the need to innovate.</p>
+                            <p>From grid operators to new market entrants, we help teams navigate complexity and build
+                                what’s next. That means clear strategy, working systems, and momentum where it
+                                matters.</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="industries-list-item__title">
+                    <span class="icon"><img src="img/link.svg" alt=""></span>
+                    Energy
+                </a>
             </div>
         </div>
         <div class="container">
-            <div class="cases-section-controls">
-                <a href="#" class="cases-section__button custom-button">
-                    <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="14"
-                                            viewBox="0 0 15 14" fill="none">
-  <path d="M12.6323 0C13.6636 0 14.4997 0.831029 14.4997 1.85616V6.9348C14.4997 7.86027 13.7449 8.6105 12.8139 8.6105C11.8828 8.6105 11.1281 7.86027 11.1281 6.9348V4.74351C11.1136 3.98071 10.495 3.36578 9.72758 3.35139H7.57495C6.64391 3.35139 5.88916 2.60116 5.88916 1.6757C5.88916 0.750235 6.64391 0 7.57495 0L12.6323 0Z"
-        fill="white"/>
-  <path d="M7.24365 5.3895C8.27495 5.3895 9.11099 6.22053 9.11099 7.24565V12.3243C9.11099 13.2498 8.35623 14 7.4252 14C6.49416 14 5.73941 13.2498 5.73941 12.3243V10.133C5.72493 9.3702 5.1063 8.75528 4.3389 8.74089H2.18628C1.25524 8.74089 0.500488 7.99065 0.500488 7.06519C0.500488 6.13973 1.25524 5.3895 2.18628 5.3895H7.24365Z"
-        fill="white"/>
-</svg></span>
-                    Expand more cases
-                </a>
+            <div class="industries-section-controls">
                 <div class="slider-controls ">
                     <a href="#" class="slick__prev slider__prev">
                         <img src="img/slick__prev.svg" alt="">
@@ -642,55 +721,12 @@
             </div>
         </div>
     </section>
-    <section class="section brands-section section--white" style="background-color: #F9F9FF;">
-        <div class="container">
-            <div class="section-head brands-section-head">
-                <div class="section__title brands-section__title">
-                    <h5>Brands we worked with</h5>
-                </div>
-                <div class="section__subtitle brands-section__subtitle">
-                    <h6>SELECTED COLLABRATIONS</h6>
-                </div>
-            </div>
-            <div class="brands-list">
-                <div class="brands-list-item">
-                    <img src="img/Company%20logo(1).svg" class="scale-on-hover" alt="">
-                </div>
-                <div class="brands-list-item">
-                    <img src="img/Company%20logo(1).svg" class="scale-on-hover" alt="">
-                </div>
-                <div class="brands-list-item">
-                    <img src="img/Company%20logo(1).svg" class="scale-on-hover" alt="">
-                </div>
-                <div class="brands-list-item">
-                    <img src="img/Company%20logo(1).svg" class="scale-on-hover" alt="">
-                </div>
-                <div class="brands-list-item">
-                    <img src="img/Company%20logo(1).svg" class="scale-on-hover" alt="">
-                </div>
-                <div class="brands-list-item">
-                    <img src="img/Company%20logo(1).svg" class="scale-on-hover" alt="">
-                </div>
-                <div class="brands-list-item">
-                    <img src="img/Company%20logo(1).svg" class="scale-on-hover" alt="">
-                </div>
-                <div class="brands-list-item">
-                    <img src="img/Company%20logo(1).svg" class="scale-on-hover" alt="">
-                </div>
-                <div class="brands-list-item">
-                    <img src="img/Company%20logo(1).svg" class="scale-on-hover" alt="">
-                </div>
-                <div class="brands-list-item">
-                    <img src="img/Company%20logo(1).svg" class="scale-on-hover" alt="">
-                </div>
-            </div>
-        </div>
-    </section>
+
     <section class="section team-section">
         <div class="container">
             <div class="section-head team-section-head">
                 <div class="section__title team-section__title">
-                    <h5>FOUNDERS</h5>
+                    <h5>Meet Our Expert</h5>
                 </div>
                 <div class="section__subtitle team-section__subtitle">
                     <h5>THE TEAM</h5>
@@ -786,6 +822,50 @@
                             Explore the Team
                         </a>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section brands-section section--white" style="background-color: #F9F9FF;">
+        <div class="container">
+            <div class="section-head brands-section-head">
+                <div class="section__title brands-section__title">
+                    <h5>Brands we worked with</h5>
+                </div>
+                <div class="section__subtitle brands-section__subtitle">
+                    <h6>SELECTED COLLABRATIONS</h6>
+                </div>
+            </div>
+            <div class="brands-list">
+                <div class="brands-list-item">
+                    <img src="img/Company%20logo(1).svg" class="scale-on-hover" alt="">
+                </div>
+                <div class="brands-list-item">
+                    <img src="img/Company%20logo(1).svg" class="scale-on-hover" alt="">
+                </div>
+                <div class="brands-list-item">
+                    <img src="img/Company%20logo(1).svg" class="scale-on-hover" alt="">
+                </div>
+                <div class="brands-list-item">
+                    <img src="img/Company%20logo(1).svg" class="scale-on-hover" alt="">
+                </div>
+                <div class="brands-list-item">
+                    <img src="img/Company%20logo(1).svg" class="scale-on-hover" alt="">
+                </div>
+                <div class="brands-list-item">
+                    <img src="img/Company%20logo(1).svg" class="scale-on-hover" alt="">
+                </div>
+                <div class="brands-list-item">
+                    <img src="img/Company%20logo(1).svg" class="scale-on-hover" alt="">
+                </div>
+                <div class="brands-list-item">
+                    <img src="img/Company%20logo(1).svg" class="scale-on-hover" alt="">
+                </div>
+                <div class="brands-list-item">
+                    <img src="img/Company%20logo(1).svg" class="scale-on-hover" alt="">
+                </div>
+                <div class="brands-list-item">
+                    <img src="img/Company%20logo(1).svg" class="scale-on-hover" alt="">
                 </div>
             </div>
         </div>
