@@ -24328,6 +24328,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ui_tabs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ui/_tabs */ "./resources/js/components/ui/_tabs.js");
 /* harmony import */ var _ui_request_on_click__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ui/_request-on-click */ "./resources/js/components/ui/_request-on-click.js");
 /* harmony import */ var _ui_modals__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./ui/_modals */ "./resources/js/components/ui/_modals.js");
+/* harmony import */ var _forms_FormHandler__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./forms/FormHandler */ "./resources/js/components/forms/FormHandler.js");
 /* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
@@ -24335,6 +24336,7 @@ function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = 
 function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+
 
 
 
@@ -24388,9 +24390,11 @@ var Application = /*#__PURE__*/function () {
         (0,_forms_show_password__WEBPACK_IMPORTED_MODULE_4__.showPassword)();
         (0,_plugins_selectric_init__WEBPACK_IMPORTED_MODULE_6__.selectrickInit)();
         (0,_plugins_fancybox_init__WEBPACK_IMPORTED_MODULE_5__.fancyboxInit)();
+        (0,_ui_modals__WEBPACK_IMPORTED_MODULE_10__.initEventsListener)();
         _this.showLoaderOnClick();
         _this.linkListener();
         var slider = new _plugins_Slick__WEBPACK_IMPORTED_MODULE_7__["default"]();
+        var formHandler = new _forms_FormHandler__WEBPACK_IMPORTED_MODULE_11__["default"]('.form-js');
       });
     }
   }, {
@@ -24494,26 +24498,173 @@ var Application = /*#__PURE__*/function () {
         $(document).find('.sub-container-wrapper').removeClass('active');
         $('body').removeClass('open-sub-container-wrapper');
       });
-      $(document).on('click', '.open-custom-modal', function (e) {
-        e.preventDefault();
-        var $t = $(this);
-        var href = $t.attr('href') || '#';
-        if (href === '#') return;
-        var $el = $(document).find(href);
-        if ($el.length === 0) return;
-        (0,_ui_modals__WEBPACK_IMPORTED_MODULE_10__.openModal)($el);
+    }
+  }]);
+}();
+
+
+/***/ }),
+
+/***/ "./resources/js/components/forms/FormHandler.js":
+/*!******************************************************!*\
+  !*** ./resources/js/components/forms/FormHandler.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ FormHandler)
+/* harmony export */ });
+/* harmony import */ var _utils_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/_helpers */ "./resources/js/components/utils/_helpers.js");
+/* harmony import */ var _plugins_fancybox_init__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../plugins/_fancybox-init */ "./resources/js/plugins/_fancybox-init.js");
+/* harmony import */ var _utils_responser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/_responser */ "./resources/js/components/utils/_responser.js");
+/* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+
+
+
+var FormHandler = /*#__PURE__*/function () {
+  function FormHandler(selector) {
+    _classCallCheck(this, FormHandler);
+    this.selector = selector;
+    this.$document = $(document);
+    this.initialize();
+    this.selectInit();
+  }
+  return _createClass(FormHandler, [{
+    key: "selectInit",
+    value: function selectInit() {
+      $(document).on('change', '.trigger-form-js', function () {
+        var $select = $(this);
+        $select.closest('form').submit();
       });
-      $(document).on('click', '.close-custom-modal', function (e) {
-        e.preventDefault();
-        var $t = $(this);
-        var href = $t.attr('href') || '#';
-        var $el = $(document).find(href);
-        if ($el.length === 0) $el = false;
-        (0,_ui_modals__WEBPACK_IMPORTED_MODULE_10__.closeModal)($el);
+    }
+  }, {
+    key: "initialize",
+    value: function initialize() {
+      var _this = this;
+      this.$document.on('submit', this.selector, function (e) {
+        return _this.handleSubmit(e);
       });
-      $(document).on('click', '.open-custom-modal .modals', function (e) {
-        e.preventDefault();
-        (0,_ui_modals__WEBPACK_IMPORTED_MODULE_10__.closeModal)();
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(event) {
+      event.preventDefault();
+      console.log(event);
+      var $form = $(event.target);
+      var formId = $form.attr('id');
+      if (!this.validateForm($form)) return;
+      var formData = new FormData(document.getElementById(formId));
+      $form.addClass('sending');
+      this.sendRequest({
+        type: $form.attr('method') || "POST",
+        url: $form.attr('action') || adminAjax,
+        processData: false,
+        contentType: false,
+        data: formData
+      });
+      if (!$form.hasClass('no-reset')) $form.trigger('reset');
+    }
+  }, {
+    key: "validateForm",
+    value: function validateForm($form) {
+      var isValid = true;
+      $form.find('input, textarea').each(function (_, input) {
+        var $input = $(input);
+        var $label = $input.closest('.form-label');
+        var value = $input.val().trim();
+        var regExp = $input.data('reg') ? new RegExp($input.data('reg')) : null;
+        if ($input.attr('required') && (!value || regExp && !regExp.test(value))) {
+          isValid = false;
+          $input.addClass('error');
+          $label.addClass('error');
+          (0,_utils_helpers__WEBPACK_IMPORTED_MODULE_0__.moveToElement)($label);
+        } else {
+          $input.removeClass('error');
+          $label.removeClass('error');
+        }
+      });
+
+      // Validate select elements
+      $form.find('select[required]').each(function (_, select) {
+        var $select = $(select);
+        var $label = $select.closest('.form-label');
+        var value = $select.val();
+        var test = !value || false || Array.isArray(value) && value.length === 0;
+        if (test) {
+          isValid = false;
+          $label.addClass('error');
+          (0,_utils_helpers__WEBPACK_IMPORTED_MODULE_0__.moveToElement)($label);
+        } else {
+          $label.removeClass('error');
+        }
+      });
+
+      // Validate custom required inputs
+      if (!this.validateRequiredInputs($form)) isValid = false;
+
+      // Validate consent checkbox
+      var $consent = $form.find('input[name="consent"]');
+      if ($consent.length && !$consent.prop('checked')) {
+        $consent.closest('.form-consent').addClass('error');
+        isValid = false;
+        (0,_utils_helpers__WEBPACK_IMPORTED_MODULE_0__.moveToElement)($consent.closest('.form-consent'));
+      } else {
+        $consent.closest('.form-consent').removeClass('error');
+      }
+      if ($form.find('.address-js').length > 0) {
+        if ($form.find('.address-js').val() !== $form.find('.address-js').attr('data-selected')) {
+          isValid = false;
+          $form.find('.address-js').closest('.form-label').addClass('error');
+          $form.find('.address-js').addClass('error');
+          (0,_utils_helpers__WEBPACK_IMPORTED_MODULE_0__.moveToElement)($form.find('.address-js').closest('.form-label'));
+        } else {
+          $form.find('.address-js').closest('.form-label').removeClass('error');
+          $form.find('.address-js').removeClass('error');
+        }
+      }
+      return isValid;
+    }
+  }, {
+    key: "validateRequiredInputs",
+    value: function validateRequiredInputs($form) {
+      var inputsGroup = {};
+      var isValid = true;
+      $form.find('[data-required]').each(function (_, input) {
+        var $input = $(input);
+        var name = $input.attr('name');
+        if (name) {
+          if (!inputsGroup[name]) inputsGroup[name] = [];
+          if ($input.prop('checked')) {
+            inputsGroup[name].push($input.val());
+          }
+        }
+      });
+      Object.keys(inputsGroup).forEach(function (key) {
+        var isChecked = inputsGroup[key].length > 0;
+        $form.find("[name=\"".concat(key, "\"]")).closest('.form-label').toggleClass('error', !isChecked);
+        if (!isChecked) isValid = false;
+      });
+      return isValid;
+    }
+  }, {
+    key: "sendRequest",
+    value: function sendRequest(options) {
+      if (this.$document.find('body').hasClass('loading')) {
+        (0,_plugins_fancybox_init__WEBPACK_IMPORTED_MODULE_1__.showMsg)(errorString);
+        return;
+      }
+      (0,_utils_helpers__WEBPACK_IMPORTED_MODULE_0__.showPreloader)();
+      this.$document.find('body').addClass('loading');
+      $.ajax(options).done(function (response) {
+        (0,_utils_responser__WEBPACK_IMPORTED_MODULE_2__["default"])(response);
       });
     }
   }]);
@@ -24721,6 +24872,7 @@ var burger = function burger() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   closeModal: () => (/* binding */ closeModal),
+/* harmony export */   initEventsListener: () => (/* binding */ initEventsListener),
 /* harmony export */   openModal: () => (/* binding */ openModal)
 /* harmony export */ });
 /* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
@@ -24728,18 +24880,44 @@ var openModal = function openModal($el) {
   $el.addClass('active');
   setTimeout(function () {
     $('body').addClass('open-custom-modal');
-  });
+  }, 100);
+  var $closeButton = $el.find('.close-custom-modal');
+  if ($closeButton.length > 0) return;
+  var id = $el.attr('id');
+  $el.append('<a href="#' + id + '" class="modal__close close-custom-modal">&#x2716;</a>');
 };
 var closeModal = function closeModal() {
   var $el = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-  if ($el) {
-    $el.removeClass('active');
-  } else {
-    $('.modals .modal').removeClass('active');
-  }
+  if (!$el) $('.modals .modal').removeClass('active');
+  if ($el.length === 0) $('.modals .modal').removeClass('active');
+  if ($el) $el.removeClass('active');
   if ($(document).find('.modals .modal.active').length > 0) return;
   $('body').removeClass('open-custom-modal');
 };
+function initEventsListener() {
+  $(document).on('click', '.open-custom-window', function (e) {
+    e.preventDefault();
+    var $t = $(this);
+    var href = $t.attr('href') || '#';
+    if (href === '#') return;
+    var $el = $(document).find(href);
+    if ($el.length === 0) return;
+    openModal($el);
+  });
+  $(document).on('click', '.close-custom-modal', function (e) {
+    e.preventDefault();
+    var $t = $(this);
+    var href = $t.attr('href') || '#';
+    var $el = $(document).find(href);
+    if ($el.length === 0) $el = false;
+    closeModal($el);
+  });
+  $(document).on('click', '.open-custom-modal .modals', function (e) {
+    if (!e.target.classList.contains('modals')) return;
+    e.preventDefault();
+    closeModal();
+  });
+}
 
 /***/ }),
 
@@ -24984,7 +25162,8 @@ function getQueryParams() {
 }
 function moveToElement($el) {
   if ($el.length === 0) return;
-  $('html, body').animate({
+  var $selector = $('body').hasClass('open-custom-modal') ? $(document).find('.modal.active') : $('html, body');
+  $selector.animate({
     scrollTop: $el.offset().top
   });
 }
@@ -25377,7 +25556,16 @@ __webpack_require__.r(__webpack_exports__);
 
 var selectrickInit = function selectrickInit() {
   var $select = $(document).find('.select').not('.selectric-init');
-  $select.selectric();
+  $select.selectric().on('change', function () {
+    var $s = $(this);
+    var val = $s.val();
+    if (val === '') {
+      $s.closest('.selectric-select').removeClass('selectric-selected');
+    } else {
+      $s.closest('.selectric-select').addClass('selectric-selected');
+      $s.closest('.form-label').removeClass('error');
+    }
+  });
   $select.addClass('selectric-init');
 };
 

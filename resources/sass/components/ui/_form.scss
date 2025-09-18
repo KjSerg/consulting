@@ -2,23 +2,232 @@
   display: flex;
   flex-wrap: wrap;
   gap: 2rem 1.2rem;
-
+  color:  #FFF;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 3.4rem;
+  font-family: "Hanken Grotesk", sans-serif;
+  @media (max-width: 450px) {
+    font-size: 1.6rem;
+    line-height: 2.8rem;
+  }
+  input{
+    height: 6.4rem;
+    border-radius: 10rem;
+    @media (max-width: 450px) {
+      height: 5.6rem;
+    }
+  }
+  textarea{
+    border-radius: 3rem;
+    resize: none;
+    height: 16rem;
+    outline: none;
+  }
+  input, textarea{
+    font-family: "Hanken Grotesk", sans-serif;
+    display: block;
+    width: 100%;
+    padding: 1.4rem 2.4rem;
+    color: #FFF;
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 3.4rem;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: #161616;
+    @media (max-width: 450px) {
+      padding: 1.4rem 1.8rem;
+      font-size: 1.6rem;
+      line-height: 2.8rem;
+    }
+    &::placeholder{
+      color:rgba( #FFF, 0.5);
+      font-size: 1.8rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 3.4rem;
+      @media (max-width: 450px) {
+        font-size: 1.6rem;
+        line-height: 2.8rem;
+      }
+    }
+  }
   &-label {
     width: 100%;
     display: inline-flex;
     flex-direction: column;
+    gap: 0.8rem;
 
     &.half {
       width: calc(50% - 0.6rem);
-      @media (max-width: 400px) {
+      @media (max-width: 450px) {
         width: 100%;
       }
     }
 
     &.error {
+      color: red;
       .selectric {
         border-color: red;
       }
     }
   }
+  button {
+
+    width: 100%;
+    display: flex;
+    padding: 1.4rem 4rem;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border-radius: 6rem;
+    background: #9935BA;
+    gap: 1.2rem;
+    color: #FFF;
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 3.4rem;
+    cursor: pointer;
+    @media (max-width: 1024px) {
+      padding: 1rem 2rem;
+    }
+    @media (max-width: 450px) {
+      font-size: 1.6rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 2.8rem;
+    }
+    &:hover {
+      @media (min-width: 1024px) {
+        background-color: #74218F;
+      }
+    }
+
+    &:active {
+      background-color: #74218F;
+    }
+
+    .icon {
+      width: 1.4rem;
+      height: 1.4rem;
+    }
+  }
+  .checked-group {
+    &:not(:last-child) {
+      margin-bottom: 16px;
+    }
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &-consent {
+    width: 100%;
+    display: flex;
+    gap: 8px;
+
+    &-box {
+      flex-grow: 0;
+      flex-shrink: 0;
+
+      span {
+        display: flex;
+        width: 24px;
+        height: 24px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        border: 1px solid rgba(0, 0, 0, 0.10);
+        background: #FFF;
+        cursor: pointer;
+
+        img {
+          display: block;
+          width: 16px;
+          height: 16px;
+          flex-shrink: 0;
+          aspect-ratio: 1/1;
+          opacity: 0;
+          transition: 0.4s ease-in-out;
+        }
+      }
+
+      input {
+        display: none;
+
+        &:checked + span img {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  .two-thirds {
+    width: calc(66% - 8px);
+  }
+
+  .three-quarters {
+    width: calc(75% - 8px);
+  }
+
+  .quarter {
+    width: calc(25% - 8px)
+  }
+
+  .third {
+    width: calc(33% - 8px);
+  }
+}
+
+
+.selectric{
+  border-radius: 10rem;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: #161616;
+  &-items{
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: #161616;
+    li {
+      color: rgba(#fff, 0.7);
+
+      font-size: 1.8rem;
+      font-style: normal;
+      font-weight: 500;
+    }
+  }
+  .button{
+    width: 6rem;
+    height: 6.4rem;
+    background: #161616;
+    @media (max-width: 450px) {
+      height: 5.6rem;
+    }
+  }
+  .label{
+    margin-left: 2.4rem;
+    margin-right: 6rem;
+    height: 6.4rem;
+    color:rgba( #FFF, 0.5);
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 6.4rem;
+    @media (max-width: 450px) {
+      height: 5.6rem;
+      line-height: 5.6rem;
+    }
+  }
+  &-selected{
+    .label{
+      color: #fff;
+    }
+  }
+}
+
+input.error, textarea.error{
+  border-color: red;
 }

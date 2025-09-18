@@ -140,7 +140,8 @@ export function getQueryParams() {
 
 export function moveToElement($el) {
     if ($el.length === 0) return;
-    $('html, body').animate({
+    const $selector = $('body').hasClass('open-custom-modal') ? $(document).find('.modal.active') : $('html, body');
+    $selector.animate({
         scrollTop: $el.offset().top
     });
 }

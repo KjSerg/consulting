@@ -8,7 +8,8 @@ import {selectrickInit} from "../plugins/_selectric-init";
 import Slick from "../plugins/Slick";
 import {tabs} from "./ui/_tabs";
 import {sendRequestClickListener} from "./ui/_request-on-click";
-import {closeModal, openModal} from "./ui/_modals";
+import {initEventsListener} from "./ui/_modals";
+import FormHandler from "./forms/FormHandler";
 
 
 export default class Application {
@@ -48,9 +49,11 @@ export default class Application {
             showPassword();
             selectrickInit();
             fancyboxInit();
+            initEventsListener();
             this.showLoaderOnClick();
             this.linkListener();
             const slider = new Slick();
+            const formHandler = new FormHandler('.form-js');
         });
     }
 
@@ -154,27 +157,5 @@ export default class Application {
             $(document).find('.sub-container-wrapper').removeClass('active');
             $('body').removeClass('open-sub-container-wrapper');
         });
-        $(document).on('click', '.open-custom-modal', function (e) {
-            e.preventDefault();
-            const $t = $(this);
-            const href = $t.attr('href') || '#';
-            if(href === '#') return;
-            const $el = $(document).find(href);
-            if($el.length === 0) return;
-            openModal($el);
-        });
-        $(document).on('click', '.close-custom-modal', function (e) {
-            e.preventDefault();
-            const $t = $(this);
-            const href = $t.attr('href') || '#';
-            let $el = $(document).find(href);
-            if($el.length === 0) $el = false;
-            closeModal($el);
-        });
-        $(document).on('click', '.open-custom-modal .modals', function (e) {
-            e.preventDefault();
-            closeModal();
-        });
-
     }
 }

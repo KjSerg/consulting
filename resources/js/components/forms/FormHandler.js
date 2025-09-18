@@ -23,7 +23,7 @@ export default class FormHandler {
 
     handleSubmit(event) {
         event.preventDefault();
-
+        console.log(event)
         const $form = $(event.target);
         const formId = $form.attr('id');
 
