@@ -40,36 +40,6 @@
     }
   }
 
-  &-section {
-    min-height: 90rem;
-    background-position: 0 0;
-    background-size: cover;
-    background-repeat: no-repeat;
-    padding-top: 32rem;
-    padding-bottom: 6.5rem;
-    @media (max-width: 1024px) {
-      padding-top: 20rem;
-      min-height: auto;
-    }
-
-    &__video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      overflow: hidden;
-
-      video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
-
-  }
-
   &__title {
     margin-bottom: 17rem;
     color: #FFF;
@@ -108,15 +78,26 @@
       display: block;
       animation: slideInRight linear 1s;
 
+
       &:nth-child(even) {
-        padding-left: 15rem;
+        margin-left: 15rem;
         animation: slideInLeft linear 1s;
         @media (max-width: 1024px) {
-          padding-left: 5rem;
+          margin-left: 5rem;
         }
 
         @media (max-width: 767px) {
-          padding-left: 0;
+          margin-left: 0;
+        }
+      }
+
+      &.long-margin{
+        margin-left: 50rem;
+        @media (max-width: 1024px) {
+          margin-left: 5rem;
+        }
+        @media (max-width: 767px) {
+          margin-left: 0;
         }
       }
     }
@@ -127,6 +108,50 @@
 
       @media (max-width: 768px) {
         border-bottom: 4px solid #006F69;
+      }
+    }
+  }
+
+
+
+  &-section {
+    min-height: 90rem;
+    background-position: 0 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-top: 32rem;
+    padding-bottom: 6.5rem;
+    @media (max-width: 1024px) {
+      padding-top: 20rem;
+      min-height: auto;
+      padding-bottom: 4rem;
+    }
+
+    &__video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+
+      video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &--inner{
+      padding-top: 24rem;
+      min-height: 61rem;
+      @media (max-width: 1024px) {
+        padding-top: 20rem;
+        min-height: auto;
+      }
+      .main__title{
+        margin-bottom: 3.5rem;
       }
     }
   }

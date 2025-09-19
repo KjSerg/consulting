@@ -54,39 +54,97 @@ export default class Application {
             initEventsListener();
             videoPlayer();
             this.showLoaderOnClick();
+            this.deliverablesInit();
             this.linkListener();
             const slider = new Slick();
             const formHandler = new FormHandler('.form-js');
             $('img.svg').toSVG({
-                svgClass: "svg-loaded",
-                onComplete: function (data) {
-                }
+                svgClass: "svg-loaded"
             });
         });
     }
 
-    linkListener() {
+    deliverablesInit(){
         const t = this;
-        sendRequestClickListener();
-        tabs();
-        this.$doc.on('click', 'a[href*="#"]:not(.fancybox, .tabs-head__item)', function (e) {
+        const $doc = this.$doc;
+        $doc.on('click', '.deliverables-menu__item', function (e) {
             e.preventDefault();
             const $t = $(this);
+            const isActive = $t.hasClass('active');
             const href = $t.attr('href');
-            if (href === '#') return;
-            const hashValue = href.split('#')[1];
-            if (hashValue !== undefined) {
-                const $el = t.$doc.find('#' + hashValue);
-                if ($el.length > 0) {
-                    $('html, body').animate({
-                        scrollTop: $el.offset().top
-                    });
-                    return;
-                }
+            if (href === undefined) return;
+            const $elem = $doc.find(href);
+            if ($elem.length === 0) return;
+            if (isActive) {
+                return;
             }
-            window.location.href = href;
+            const $container = $t.closest('.deliverables-container');
+            const $arrow = $container.find('.deliverables-menu__icon');
+            $container.find('.deliverables-menu__item').removeClass('active');
+            $container.find('.deliverables-content__item').slideUp();
+            $t.addClass('active');
+            $elem.slideDown();
+            if ($arrow.length === 0) return;
+            let $containerTopPosition = $container.offset().top;
+            let $linkTopPosition = $t.offset().top;
+            let $linkH = $t.outerHeight();
+            let pos = $linkTopPosition - $containerTopPosition;
+            pos = pos + 16;
+            let rem = parseInt($doc.find('html').css('font-size'));
+            if (isNaN(rem)) {
+                $arrow.css('top', pos + 'px');
+            } else {
+                pos = pos / rem;
+                $arrow.css('top', pos + 'rem');
+            }
+
         });
-        this.$doc.on('click', '[data-link]', function (e) {
+
+
+        function myResizeFunction() {
+            if($(window).width() <= 1023){
+                return;
+            }
+            $doc.find('.deliverables-container').each(function () {
+                const $container = $(this);
+                const $t = $container.find('.deliverables-menu__item.active');
+                const $arrow = $container.find('.deliverables-menu__icon');
+                if ($arrow.length === 0) return;
+                let $containerTopPosition = $container.offset().top;
+                let $linkTopPosition = $t.offset().top;
+                let $linkH = $t.outerHeight();
+                let pos = $linkTopPosition - $containerTopPosition;
+                pos = pos + 12;
+                let rem = parseInt($doc.find('html').css('font-size'));
+                if (isNaN(rem)) {
+                    $arrow.css('top', pos + 'px');
+                } else {
+                    pos = pos / rem;
+                    $arrow.css('top', pos + 'rem');
+                }
+            });
+        }
+
+        const debouncedResizeHandler = debounce(myResizeFunction, 200);
+        window.addEventListener('resize', debouncedResizeHandler);
+
+        function debounce(func, delay) {
+            let timeoutId;
+            return function(...args) {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => {
+                    func.apply(this, args);
+                }, delay);
+            };
+        }
+    }
+
+    linkListener() {
+        const t = this;
+        const $doc = this.$doc;
+        sendRequestClickListener();
+        tabs();
+        $doc.on('click', '[data-link]', function (e) {
             e.preventDefault();
             const $t = $(this);
             const href = $t.attr('data-link');
@@ -103,7 +161,7 @@ export default class Application {
             }
             window.location.href = href;
         });
-        this.$doc.on('click', '.applications-head__item', function (e) {
+        $doc.on('click', '.applications-head__item', function (e) {
             e.preventDefault();
             const $t = $(this);
             const href = $t.attr('href');
@@ -116,7 +174,7 @@ export default class Application {
             if (href === '#') return;
             window.location.href = href;
         });
-        this.$doc.on('click', '.copy-link-js', function (e) {
+        $doc.on('click', '.copy-link-js', function (e) {
             e.preventDefault();
             const $t = $(this);
             const href = $t.attr('href');
@@ -124,7 +182,7 @@ export default class Application {
             copyToClipboard(href);
             showMsg(copiedString);
         });
-        $(document).on('click', '.pagination-js a', function (e) {
+        $doc.on('click', '.pagination-js a', function (e) {
             e.preventDefault();
             const $t = $(this);
             const href = $t.attr('href');
@@ -147,7 +205,7 @@ export default class Application {
                 $(document).find('.container-js').append($catalog.html());
             });
         });
-        $(document).on('click', '.header-container-mobile .menu-item-has-children', function (e) {
+        $doc.on('click', '.header-container-mobile .menu-item-has-children', function (e) {
             e.preventDefault();
             const $t = $(this);
             const $wrapper = $t;
@@ -160,10 +218,27 @@ export default class Application {
             $container.closest('.sub-container-wrapper').addClass('active');
             $('body').addClass('open-sub-container-wrapper');
         });
-        $(document).on('click', '.close-sub-container', function (e) {
+        $doc.on('click', '.close-sub-container', function (e) {
             e.preventDefault();
             $(document).find('.sub-container-wrapper').removeClass('active');
             $('body').removeClass('open-sub-container-wrapper');
+        });
+        $doc.on('click', 'a[href*="#"]:not(.fancybox, .tabs-head__item, .deliverables-menu__item, .not-custom-listener-js)', function (e) {
+            e.preventDefault();
+            const $t = $(this);
+            const href = $t.attr('href');
+            if (href === '#') return;
+            const hashValue = href.split('#')[1];
+            if (hashValue !== undefined) {
+                const $el = t.$doc.find('#' + hashValue);
+                if ($el.length > 0) {
+                    $('html, body').animate({
+                        scrollTop: $el.offset().top
+                    });
+                    return;
+                }
+            }
+            window.location.href = href;
         });
 
     }
