@@ -24330,6 +24330,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ui_modals__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./ui/_modals */ "./resources/js/components/ui/_modals.js");
 /* harmony import */ var _forms_FormHandler__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./forms/FormHandler */ "./resources/js/components/forms/FormHandler.js");
 /* harmony import */ var _ui_videoPlayer__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./ui/_videoPlayer */ "./resources/js/components/ui/_videoPlayer.js");
+/* harmony import */ var _plugins_SVGLoader__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../plugins/SVGLoader */ "./resources/js/plugins/SVGLoader.js");
+/* harmony import */ var _plugins_SVGLoader__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_plugins_SVGLoader__WEBPACK_IMPORTED_MODULE_13__);
 /* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
@@ -24337,6 +24339,7 @@ function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = 
 function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+
 
 
 
@@ -24398,6 +24401,10 @@ var Application = /*#__PURE__*/function () {
         _this.linkListener();
         var slider = new _plugins_Slick__WEBPACK_IMPORTED_MODULE_7__["default"]();
         var formHandler = new _forms_FormHandler__WEBPACK_IMPORTED_MODULE_11__["default"]('.form-js');
+        $('img.svg').toSVG({
+          svgClass: "svg-loaded",
+          onComplete: function onComplete(data) {}
+        });
       });
     }
   }, {
@@ -25296,6 +25303,49 @@ function responseHandler(response) {
     }
   }
 }
+
+/***/ }),
+
+/***/ "./resources/js/plugins/SVGLoader.js":
+/*!*******************************************!*\
+  !*** ./resources/js/plugins/SVGLoader.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+/* provided dependency */ var jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+(function ($) {
+  $.fn.toSVG = function (options) {
+    var params = $.extend({
+      svgClass: "replaced-svg",
+      onComplete: function onComplete() {}
+    }, options);
+    this.each(function () {
+      var $img = jQuery(this);
+      var imgID = $img.attr('id');
+      var imgClass = $img.attr('class');
+      var imgURL = $img.attr('src');
+      if (!/\.(svg)$/i.test(imgURL)) {
+        console.warn("image src='" + imgURL + "' is not a SVG, item remained tag <img/> ");
+        return;
+      }
+      $.get(imgURL, function (data) {
+        var $svg = jQuery(data).find('svg');
+        if (typeof imgID !== 'undefined') {
+          $svg = $svg.attr('id', imgID);
+        }
+        if (typeof imgClass !== 'undefined') {
+          $svg = $svg.attr('class', imgClass + ' ' + params.svgClass);
+        }
+        $svg = $svg.removeAttr('xmlns:a');
+        if (!$svg.attr('viewBox') && $svg.attr('height') && $svg.attr('width')) {
+          $svg.attr('viewBox', '0 0 ' + $svg.attr('height') + ' ' + $svg.attr('width'));
+        }
+        $img.replaceWith($svg);
+        typeof params.onComplete == "function" ? params.onComplete.call(this, $svg) : '';
+      });
+    });
+  };
+})(jQuery);
 
 /***/ }),
 

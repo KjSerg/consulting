@@ -263,6 +263,32 @@ em, i {
       position: relative;
       z-index: 1;
     }
+
+    &--overlay{
+      &:before{
+        position: absolute;
+        display: block;
+        content: '';
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.80);
+      }
+    }
+    &--decoration{
+      &:after{
+        position: absolute;
+        display: block;
+        content: '';
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.4;
+        background: linear-gradient(180deg, rgba(153, 53, 186, 0.00) 50%, #9935BA 100%);
+      }
+    }
   }
 
   &--white {
@@ -538,6 +564,10 @@ em, i {
       flex-shrink: 0;
     }
   }
+}
+
+.animation-none{
+  animation: none!important;
 }
 
 @keyframes show {

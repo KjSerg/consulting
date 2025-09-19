@@ -11,6 +11,7 @@ import {sendRequestClickListener} from "./ui/_request-on-click";
 import {initEventsListener} from "./ui/_modals";
 import FormHandler from "./forms/FormHandler";
 import {videoPlayer} from "./ui/_videoPlayer";
+import '../plugins/SVGLoader';
 
 
 export default class Application {
@@ -56,6 +57,11 @@ export default class Application {
             this.linkListener();
             const slider = new Slick();
             const formHandler = new FormHandler('.form-js');
+            $('img.svg').toSVG({
+                svgClass: "svg-loaded",
+                onComplete: function (data) {
+                }
+            });
         });
     }
 
